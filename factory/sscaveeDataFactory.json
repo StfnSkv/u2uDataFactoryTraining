@@ -1,0 +1,9 @@
+{
+	"name": "sscaveeDataFactory",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "58feb2c5-ee27-47d8-aa00-d57092d907f3",
+		"tenantId": "d018aec4-2b2b-4c66-9939-2c96877e6bf1"
+	}
+}

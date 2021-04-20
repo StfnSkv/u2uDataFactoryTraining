@@ -1,5 +1,5 @@
 {
-	"name": "TripDestination",
+	"name": "TripParquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeG2",

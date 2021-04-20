@@ -1,5 +1,5 @@
 {
-	"name": "StationSource",
+	"name": "StationCSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BLOBBabsStorage",

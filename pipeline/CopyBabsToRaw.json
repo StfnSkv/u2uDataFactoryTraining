@@ -125,13 +125,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "StationSource",
+						"referenceName": "StationCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "StationDestination",
+						"referenceName": "StationParquet",
 						"type": "DatasetReference"
 					}
 				]
@@ -312,13 +312,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "TripSource",
+						"referenceName": "TripCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "TripDestination",
+						"referenceName": "TripParquet",
 						"type": "DatasetReference"
 					}
 				]
@@ -647,13 +647,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "WeatherSource",
+						"referenceName": "WeatherCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "WeatherDestination",
+						"referenceName": "WeatherParquet",
 						"type": "DatasetReference"
 					}
 				]
@@ -760,13 +760,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "StatusSource",
+						"referenceName": "StatusCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "StatusDestination",
+						"referenceName": "StatusParquet",
 						"type": "DatasetReference"
 					}
 				]

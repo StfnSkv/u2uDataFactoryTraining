@@ -1,5 +1,5 @@
 {
-	"name": "WeatherDestination",
+	"name": "WeatherParquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeG2",

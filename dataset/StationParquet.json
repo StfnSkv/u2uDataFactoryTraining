@@ -1,5 +1,5 @@
 {
-	"name": "StationDestination",
+	"name": "StationParquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeG2",

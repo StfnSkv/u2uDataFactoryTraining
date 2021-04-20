@@ -1,5 +1,5 @@
 {
-	"name": "StatusDestination",
+	"name": "StatusParquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeG2",

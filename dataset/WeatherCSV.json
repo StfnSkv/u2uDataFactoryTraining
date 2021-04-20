@@ -1,5 +1,5 @@
 {
-	"name": "WeatherSource",
+	"name": "WeatherCSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BLOBBabsStorage",

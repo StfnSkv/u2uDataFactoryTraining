@@ -350,7 +350,82 @@
 								}
 							},
 							"enableStaging": false,
-							"validateDataConsistency": false
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "station_id",
+											"type": "String"
+										},
+										"sink": {
+											"name": "station_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "lat",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lat",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "long",
+											"type": "String"
+										},
+										"sink": {
+											"name": "long",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "dockcount",
+											"type": "String"
+										},
+										"sink": {
+											"name": "dockcount",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "landmark",
+											"type": "String"
+										},
+										"sink": {
+											"name": "landmark",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "installation",
+											"type": "String"
+										},
+										"sink": {
+											"name": "installation",
+											"type": "String"
+										}
+									}
+								]
+							}
 						},
 						"inputs": [
 							{
@@ -410,6 +485,130 @@
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Trip ID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TripID",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Duration",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Duration",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Start Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "StartDate",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Start Station",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "StartStation",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Start Terminal",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "StartTerminal",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "End Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EndDate",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "End Station",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EndStation",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "End Terminal",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EndTerminal",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Bike #",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Bike#",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Subscriber Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberType",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Zip Code",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ZipCode",
+											"physicalType": "UTF8"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
@@ -475,6 +674,278 @@
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "PDT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PDT",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Max TemperatureF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MaxTemperatureF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Mean TemperatureF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MeanTemperatureF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Min TemperatureF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MinTemperatureF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Max Dew PointF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MaxDewPointF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "MeanDew PointF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MeanDewPointF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Min DewpointF",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MinDewpointF",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Max Humidity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MaxHumidity",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Mean Humidity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MeanHumidity",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Min Humidity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MinHumidity",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Max Sea Level PressureIn",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MaxSeaLevelPressureIn",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Mean Sea Level PressureIn",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MeanSeaLevelPressureIn",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Min Sea Level PressureIn",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MinSeaLevelPressureIn",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Max VisibilityMiles",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MaxVisibilityMiles",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Mean VisibilityMiles",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MeanVisibilityMiles",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Min VisibilityMiles",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MinVisibilityMiles",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Max Wind SpeedMPH",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MaxWindSpeedMPH",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Mean Wind SpeedMPH",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MeanWindSpeedMPH",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Max Gust SpeedMPH",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " MaxGustSpeedMPH",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "PrecipitationIn",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PrecipitationIn",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " CloudCover",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " CloudCover",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " Events",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " Events",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": " WindDirDegrees",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": " WindDirDegrees",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Zip",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Zip",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
@@ -540,6 +1011,56 @@
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "station_id",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "station_id",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "bikes_available",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "bikes_available",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "docks_available",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "docks_available",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "time",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "time",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,

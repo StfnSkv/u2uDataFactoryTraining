@@ -1,0 +1,23 @@
+{
+	"name": "StatusSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BLOBBabsStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "status_data_2015.csv.gz",
+				"folderPath": "data/babs/sourcefolder",
+				"container": "u2ublob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

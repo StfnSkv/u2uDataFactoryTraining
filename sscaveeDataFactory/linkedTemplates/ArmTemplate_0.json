@@ -55,7 +55,62 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StationParquet')]",
+			"name": "[concat(parameters('factoryName'), '/CurrentFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BLOBBabsStorage",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": "data/babs/sourcefolder",
+						"container": "u2ublob"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ListOfDataFiles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BLOBBabsStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "data/babs/sourcefolder",
+						"container": "u2ublob"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SmallFilesInLake')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -64,16 +119,14 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "Parquet",
+				"type": "Binary",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Station",
+						"folderPath": "RAW/BABS/SmallFiles",
 						"fileSystem": "datalake"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
+					}
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
@@ -138,7 +191,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/StatusParquet')]",
+			"name": "[concat(parameters('factoryName'), '/StationParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -151,7 +204,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Status",
+						"folderPath": "RAW/BABS/Station",
 						"fileSystem": "datalake"
 					},
 					"compressionCodec": "snappy"
@@ -193,7 +246,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/TripParquet')]",
+			"name": "[concat(parameters('factoryName'), '/StatusParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -206,7 +259,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Trip",
+						"folderPath": "RAW/BABS/Status",
 						"fileSystem": "datalake"
 					},
 					"compressionCodec": "snappy"
@@ -247,7 +300,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/WeatherParquet')]",
+			"name": "[concat(parameters('factoryName'), '/TripParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -260,7 +313,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Weather",
+						"folderPath": "RAW/BABS/Trip",
 						"fileSystem": "datalake"
 					},
 					"compressionCodec": "snappy"
@@ -301,62 +354,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ListOfDataFiles')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CurrentFile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SmallFilesInLake')]",
+			"name": "[concat(parameters('factoryName'), '/WeatherParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -365,17 +363,261 @@
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "Binary",
+				"type": "Parquet",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/SmallFiles",
+						"folderPath": "RAW/BABS/Weather",
 						"fileSystem": "datalake"
-					}
-				}
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataLakeTemp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeG2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "TEMP",
+						"fileSystem": "datalake"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopySmallFiles')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GetFileList",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ListOfDataFiles",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEachFile",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "GetFileList",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('GetFileList').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "GetFileSize",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "CurrentFile",
+											"type": "DatasetReference",
+											"parameters": {
+												"FileName": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"size"
+										],
+										"storeSettings": {
+											"type": "AzureBlobStorageReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "BinaryReadSettings"
+										}
+									}
+								},
+								{
+									"name": "IfSizeIsSmall",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "GetFileSize",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@less(activity('GetFileSize').output.size, 200000)",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "Copy File",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobFSWriteSettings"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "CurrentFile",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileName": "@item().name"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "SmallFilesInLake",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ListOfDataFiles')]",
+				"[concat(variables('factoryId'), '/datasets/CurrentFile')]",
+				"[concat(variables('factoryId'), '/datasets/SmallFilesInLake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TripsPerStation')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "TripCSV",
+								"type": "DatasetReference"
+							},
+							"name": "TripSource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DataLakeTemp",
+								"type": "DatasetReference"
+							},
+							"name": "SinkIntoDataLake"
+						}
+					],
+					"transformations": [
+						{
+							"name": "AggregateStartStation"
+						},
+						{
+							"name": "AggregateEndStation"
+						},
+						{
+							"name": "JoinStation"
+						}
+					],
+					"script": "source(output(\n\t\t{Trip ID} as integer,\n\t\tDuration as short,\n\t\t{Start Date} as timestamp,\n\t\t{Start Station} as string,\n\t\t{Start Terminal} as short,\n\t\t{End Date} as timestamp,\n\t\t{End Station} as string,\n\t\t{End Terminal} as short,\n\t\t{Bike #} as short,\n\t\t{Subscriber Type} as string,\n\t\t{Zip Code} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: true,\n\tinferDriftedColumnTypes: true) ~> TripSource\nTripSource aggregate(groupBy(StartStation = {Start Station}),\n\tCount = count({Trip ID}),\n\t\tDurationAvg = avg(Duration)) ~> AggregateStartStation\nTripSource aggregate(groupBy(EndStation = {End Station}),\n\tCount = count({Trip ID}),\n\t\tDurationAvg = avg(Duration)) ~> AggregateEndStation\nAggregateEndStation, AggregateStartStation join(EndStation == StartStation,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> JoinStation\nJoinStation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tmapColumn(\n\t\tEndStation,\n\t\tCount = AggregateEndStation@Count,\n\t\tDurationAvg = AggregateEndStation@DurationAvg,\n\t\tStartStation,\n\t\tCount = AggregateStartStation@Count,\n\t\tDurationAvg = AggregateStartStation@DurationAvg\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SinkIntoDataLake"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/TripCSV')]",
+				"[concat(variables('factoryId'), '/datasets/DataLakeTemp')]"
 			]
 		},
 		{
@@ -1160,6 +1402,43 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "TripsPerStation",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Copy_Trip",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "TripsPerStation",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"TripSource": {},
+									"SinkIntoDataLake": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"annotations": []
@@ -1172,178 +1451,8 @@
 				"[concat(variables('factoryId'), '/datasets/WeatherCSV')]",
 				"[concat(variables('factoryId'), '/datasets/WeatherParquet')]",
 				"[concat(variables('factoryId'), '/datasets/StatusCSV')]",
-				"[concat(variables('factoryId'), '/datasets/StatusParquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ForEachLab')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "ListOfDataFiles",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata1').output.childItems",
-								"type": "Expression"
-							},
-							"isSequential": false,
-							"activities": [
-								{
-									"name": "Get Metadata2",
-									"type": "GetMetadata",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"dataset": {
-											"referenceName": "CurrentFile",
-											"type": "DatasetReference",
-											"parameters": {
-												"FileName": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										},
-										"fieldList": [
-											"size"
-										],
-										"storeSettings": {
-											"type": "AzureBlobStorageReadSettings",
-											"enablePartitionDiscovery": false
-										},
-										"formatSettings": {
-											"type": "BinaryReadSettings"
-										}
-									}
-								},
-								{
-									"name": "If Condition1",
-									"type": "IfCondition",
-									"dependsOn": [
-										{
-											"activity": "Get Metadata2",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"userProperties": [],
-									"typeProperties": {
-										"expression": {
-											"value": "@less(activity('Get Metadata2').output.size, 200000)",
-											"type": "Expression"
-										},
-										"ifTrueActivities": [
-											{
-												"name": "Copy data1",
-												"type": "Copy",
-												"dependsOn": [],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [],
-												"typeProperties": {
-													"source": {
-														"type": "BinarySource",
-														"storeSettings": {
-															"type": "AzureBlobStorageReadSettings",
-															"recursive": true
-														},
-														"formatSettings": {
-															"type": "BinaryReadSettings"
-														}
-													},
-													"sink": {
-														"type": "BinarySink",
-														"storeSettings": {
-															"type": "AzureBlobFSWriteSettings"
-														}
-													},
-													"enableStaging": false
-												},
-												"inputs": [
-													{
-														"referenceName": "CurrentFile",
-														"type": "DatasetReference",
-														"parameters": {
-															"FileName": "@item().name"
-														}
-													}
-												],
-												"outputs": [
-													{
-														"referenceName": "SmallFilesInLake",
-														"type": "DatasetReference",
-														"parameters": {}
-													}
-												]
-											}
-										]
-									}
-								}
-							]
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ListOfDataFiles')]",
-				"[concat(variables('factoryId'), '/datasets/CurrentFile')]",
-				"[concat(variables('factoryId'), '/datasets/SmallFilesInLake')]"
+				"[concat(variables('factoryId'), '/datasets/StatusParquet')]",
+				"[concat(variables('factoryId'), '/dataflows/TripsPerStation')]"
 			]
 		}
 	]

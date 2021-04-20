@@ -6,18 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "sscaveeDataFactory"
-		},
-		"AzureDataLakeG2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeG2'"
-		},
-		"BLOBBabsStorage_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BLOBBabsStorage'"
-		},
-		"AzureDataLakeG2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://u2usscaveedatalake.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -154,15 +142,13 @@
 						"inputs": [
 							{
 								"referenceName": "StationCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "StationParquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -343,15 +329,13 @@
 						"inputs": [
 							{
 								"referenceName": "TripCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "TripParquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -680,15 +664,13 @@
 						"inputs": [
 							{
 								"referenceName": "WeatherCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "WeatherParquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -795,15 +777,13 @@
 						"inputs": [
 							{
 								"referenceName": "StatusCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "StatusParquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -829,14 +809,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "TripsPerStation",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"TripSource": {},
-									"SinkIntoDataLake": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -848,14 +822,6 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/StationCSV')]",
-				"[concat(variables('factoryId'), '/datasets/StationParquet')]",
-				"[concat(variables('factoryId'), '/datasets/TripCSV')]",
-				"[concat(variables('factoryId'), '/datasets/TripParquet')]",
-				"[concat(variables('factoryId'), '/datasets/WeatherCSV')]",
-				"[concat(variables('factoryId'), '/datasets/WeatherParquet')]",
-				"[concat(variables('factoryId'), '/datasets/StatusCSV')]",
-				"[concat(variables('factoryId'), '/datasets/StatusParquet')]",
 				"[concat(variables('factoryId'), '/dataflows/TripsPerStation')]"
 			]
 		},
@@ -880,8 +846,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "ListOfDataFiles",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -1012,8 +977,7 @@
 												"outputs": [
 													{
 														"referenceName": "SmallFilesInLake",
-														"type": "DatasetReference",
-														"parameters": {}
+														"type": "DatasetReference"
 													}
 												]
 											}
@@ -1025,364 +989,6 @@
 					}
 				],
 				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ListOfDataFiles')]",
-				"[concat(variables('factoryId'), '/datasets/CurrentFile')]",
-				"[concat(variables('factoryId'), '/datasets/SmallFilesInLake')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CurrentFile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"FileName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().FileName",
-							"type": "Expression"
-						},
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ListOfDataFiles')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SmallFilesInLake')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeG2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/SmallFiles",
-						"fileSystem": "datalake"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StationCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "201508_station_data.csv",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "station_id",
-						"type": "String"
-					},
-					{
-						"name": "name",
-						"type": "String"
-					},
-					{
-						"name": "lat",
-						"type": "String"
-					},
-					{
-						"name": "long",
-						"type": "String"
-					},
-					{
-						"name": "dockcount",
-						"type": "String"
-					},
-					{
-						"name": "landmark",
-						"type": "String"
-					},
-					{
-						"name": "installation",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StationParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeG2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Station",
-						"fileSystem": "datalake"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StatusCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "status_data_2015.csv.gz",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					},
-					"columnDelimiter": ",",
-					"compressionCodec": "gzip",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/StatusParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeG2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Status",
-						"fileSystem": "datalake"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TripCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "201508_trip_data.csv",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TripParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeG2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Trip",
-						"fileSystem": "datalake"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WeatherCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BLOBBabsStorage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "201508_weather_data.csv",
-						"folderPath": "data/babs/sourcefolder",
-						"container": "u2ublob"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BLOBBabsStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WeatherParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeG2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "RAW/BABS/Weather",
-						"fileSystem": "datalake"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeG2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeG2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeG2_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BLOBBabsStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('BLOBBabsStorage_connectionString')]"
-				}
 			},
 			"dependsOn": []
 		},
@@ -1426,7 +1032,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TripCSV')]",
 				"[concat(variables('factoryId'), '/datasets/DataLakeTemp')]"
 			]
 		},
@@ -1451,9 +1056,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeG2')]"
-			]
+			"dependsOn": []
 		}
 	]
 }

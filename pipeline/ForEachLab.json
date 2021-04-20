@@ -70,7 +70,9 @@
 										"FileName": "@item().name"
 									}
 								},
-								"fieldList": [],
+								"fieldList": [
+									"size"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"enablePartitionDiscovery": false

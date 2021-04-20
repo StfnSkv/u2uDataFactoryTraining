@@ -1,0 +1,20 @@
+{
+	"name": "WeatherDestination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeG2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "RAW/BABS/Weather",
+				"fileSystem": "datalake"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

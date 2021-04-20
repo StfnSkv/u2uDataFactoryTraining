@@ -1,0 +1,20 @@
+{
+	"name": "DataLakeTemp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeG2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "TEMP",
+				"fileSystem": "datalake"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

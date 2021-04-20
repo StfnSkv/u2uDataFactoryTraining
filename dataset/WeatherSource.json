@@ -1,0 +1,23 @@
+{
+	"name": "WeatherSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BLOBBabsStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "201508_weather_data.csv",
+				"folderPath": "data/babs/sourcefolder",
+				"container": "u2ublob"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

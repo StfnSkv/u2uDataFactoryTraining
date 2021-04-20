@@ -65,7 +65,10 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "CurrentFile",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": "@item().name"
+									}
 								},
 								"fieldList": [],
 								"storeSettings": {

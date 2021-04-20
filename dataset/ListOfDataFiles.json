@@ -1,0 +1,18 @@
+{
+	"name": "ListOfDataFiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BLOBBabsStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "data/babs/sourcefolder",
+				"container": "u2ublob"
+			}
+		}
+	}
+}

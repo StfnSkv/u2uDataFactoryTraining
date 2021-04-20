@@ -1,9 +1,9 @@
 {
-	"name": "ForEachLab",
+	"name": "CopySmallFiles",
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata1",
+				"name": "GetFileList",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -32,11 +33,11 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEachFile",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "GetFileList",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -45,13 +46,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
+						"value": "@activity('GetFileList').output.childItems",
 						"type": "Expression"
 					},
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "Get Metadata2",
+							"name": "GetFileSize",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -78,6 +79,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -86,11 +88,11 @@
 							}
 						},
 						{
-							"name": "If Condition1",
+							"name": "IfSizeIsSmall",
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "Get Metadata2",
+									"activity": "GetFileSize",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -99,12 +101,12 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@less(activity('Get Metadata2').output.size, 200000)",
+									"value": "@less(activity('GetFileSize').output.size, 200000)",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Copy data1",
+										"name": "Copy File",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {

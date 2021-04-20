@@ -67,7 +67,10 @@
 									"referenceName": "CurrentFile",
 									"type": "DatasetReference",
 									"parameters": {
-										"FileName": "@item().name"
+										"FileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
 									}
 								},
 								"fieldList": [
